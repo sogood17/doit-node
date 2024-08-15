@@ -1,11 +1,10 @@
 const express = require("express");
 const router = express.Router();
+const { getAllcontacts } = require('../controllers/contactControllers');
 
 //Read and create all contacts
 router.route("/")
-.get((req, res) => {
-  res.send("Contacts Page!");
-  })
+.get(getAllcontacts)
 .post((req, res) => {
   const {name, email, phone} = req.body;
   if (!name || !email || !phone) {
