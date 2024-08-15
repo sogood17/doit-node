@@ -1,36 +1,35 @@
-//asyncHandler 가져오기
-
-const getAllContacts = async(req, res) => {
+//GET contacts/
+const getAllContacts = asyncHandler(async(req, res) => {
   try {
     res.send("Contacts Page!");
     console.log(req.body);
   } catch (err) {
     console.log(err);
   }
-}
-
-const postAllContacts = async(req, res) => {
+});
+//POST contacts/
+const postAllContacts = asyncHandler(async(req, res) => {
   try {
     const {name, email, phone} = req.body;
     if (!name || !phone) {
       return res.send("Required value not entered.");
     }
-    res.send("Create Contact!")
+    res.send("Create Contact!");
 
   } catch (err) {
     console.log(err);
   }
-}
-
-const getContact = async(req, res) => {
+});
+//GET contacts/:id
+const getContact = asyncHandler(async(req, res) => {
   try {
     res.send("View Contact for ID:" + req.params.id);
   } catch (err) {
     console.log(err);
   }
-}
-
-const updateContact = async(req, res) => {
+});
+//PUT contacts/:id
+const updateContact = asyncHandler(async(req, res) => {
   try {
     const {name, email, phone} = req.body;
     if (!name && !email && !phone) {
@@ -41,12 +40,11 @@ const updateContact = async(req, res) => {
   } catch (err) {
     console.log(err);
   }
-}
-
-const deleteContact = async(req, res) => {
-  res.send("Delete Contact for ID: " + req.params.id)
-}
-
+});
+//DELETE contacts/:id
+const deleteContact = asyncHandler(async(req, res) => {
+  res.send("Delete Contact for ID: " + req.params.id);
+});
 
 
 module.exports = {getAllContacts, postAllContacts, getContact, updateContact, deleteContact};
