@@ -1,4 +1,6 @@
 //GET contacts/
+const asyncHandler = require("express-async-handler");
+
 const getAllContacts = asyncHandler(async(req, res) => {
   try {
     res.send("Contacts Page!");
