@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const { getAllcontacts } = require('../controllers/contactControllers');
+const getAllContacts = require("../controllers/contactControllers");
 
 //Read and create all contacts
 router.route("/")
-.get(getAllcontacts)
+.get(getAllContacts)
 .post((req, res) => {
   const {name, email, phone} = req.body;
   if (!name || !email || !phone) {
@@ -17,11 +17,11 @@ router.route("/")
 //Read 1 contact
 router.route("/:id")
 .get((req, res) => {
-  res.send("View Contact for ID: " + req.params.id);
+  res.send("View Contact for ID: " + req.params.id)
   })
 //Modify 1 contact
 .put((req, res) => {
-  res.send("Update Contact for ID: " + req.params.id);
+  res.send("Update Contact for ID: " + req.params.id)
   })
 //Delete 1 contact
 .delete((req, res) => {
