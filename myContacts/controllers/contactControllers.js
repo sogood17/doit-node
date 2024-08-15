@@ -48,7 +48,7 @@ const deleteContact = asyncHandler(async(req, res) => {
   const {id}=req.params;
   const contactById = await Contact.findById(id);
   if (!contactById) {
-    throw new Error("Contact nof found");
+    throw new Error("Contact not found");
   }
   const deletedContact = await Contact.deleteOne()
   res.send("Delete Contact for ID: " + id);
