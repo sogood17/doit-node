@@ -1,32 +1,19 @@
 const express = require("express");
 const router = express.Router();
-const getAllContacts = require("../controllers/contactControllers");
+const {getAllContacts, postAllContacts, getContact, updateContact, deleteContact} = require("../controllers/contactControllers");
 
 //Read and create all contacts
 router.route("/")
 .get(getAllContacts)
-.post((req, res) => {
-  const {name, email, phone} = req.body;
-  if (!name || !email || !phone) {
-    return res.send("Required value not entered.")
-  }
-
-  res.send("Create Contact");
-  })
+.post(postAllContacts);
 
 //Read 1 contact
 router.route("/:id")
-.get((req, res) => {
-  res.send("View Contact for ID: " + req.params.id)
-  })
+.get(getContact)
 //Modify 1 contact
-.put((req, res) => {
-  res.send("Update Contact for ID: " + req.params.id)
-  })
+.put(updateContact)
 //Delete 1 contact
-.delete((req, res) => {
-  res.send("Delete Contact for ID: " + req.params.id);
-  })
+.delete(deleteContact);
 
 //Using GET method without middleware
 // app.get("/contacts", (req, res) => {
