@@ -4,10 +4,18 @@ const asyncHandler = require("express-async-handler");
 //GET contacts/
 const getAllContacts = asyncHandler(async(req, res) => {
   const allContacts = await Contact.find();
-  res.json(allContacts);
+  res.render("index", {contacts: allContacts});
 });
+
+//view add contact form
+//GET contacts/add
+const addContactForm = (req, res) => {
+  res.render("add");
+}
+
+
 //POST contacts/
-const postAllContacts = asyncHandler(async(req, res) => {
+const createContact = asyncHandler(async(req, res) => {
   const {name, email, phone} = req.body;
   if (!name || !phone) {
     return res.send("Required value not entered.");
@@ -55,4 +63,4 @@ const deleteContact = asyncHandler(async(req, res) => {
 });
 
 
-module.exports = {getAllContacts, postAllContacts, getContact, updateContact, deleteContact};
+module.exports = {getAllContacts, addContactForm, createContact, getContact, updateContact, deleteContact};
