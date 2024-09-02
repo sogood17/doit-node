@@ -13,7 +13,7 @@
   <header class="border-shadow">
     <div class="container ">
       <nav>
-        <a href="/"><i class="fa-solid fa-address-book"></i> My Contacts</a>
+        <a href="/contacts"><i class="fa-solid fa-address-book"></i> My Contacts</a>
       </nav>
     </div>
   </header>
@@ -47,12 +47,14 @@
             <%= contact.phone %>
           </td>
           <td>
-            <a href="#" class="btn update" title="수정">
+            <a href="/contacts/<%= contact._id %>" class="btn update" title="수정">
               <i class="fas fa-pencil-alt"></i>
             </a>
-            <a href="#" class="btn delete" title="삭제">
-              <i class="fas fa-times"></i>
-            </a>                
+            <form action="/contacts/<%= contact._id %>?_method=DELETE" method="POST" class="btn delete" title="삭제">
+              <button type="submit">
+                X
+              </button>
+            </form>               
           </td>
         </tr>
         <% }) %>

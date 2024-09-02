@@ -21,14 +21,14 @@ const createContact = asyncHandler(async(req, res) => {
     return res.send("Required value not entered.");
   } else {
   const newContact = await Contact.create({name, email, phone})
-  res.send("Create Contact!");
+  res.redirect("/contacts");
   }
 });
 //GET contacts/:id
 const getContact = asyncHandler(async(req, res) => {
   const {id}=req.params;
   const contactById = await Contact.findById(id);
-  res.json(contactById);
+  res.render("update", {contact: contactById})
 });
 //PUT contacts/:id
 const updateContact = asyncHandler(async(req, res) => {
@@ -48,7 +48,7 @@ const updateContact = asyncHandler(async(req, res) => {
     contactById.phone=phone;
     }
     contactById.save();
-    res.send(id + " is Updated.");
+    res.redirect("/contacts");
   }
 });
 //DELETE contacts/:id
@@ -59,7 +59,7 @@ const deleteContact = asyncHandler(async(req, res) => {
     throw new Error("Contact not found");
   }
   const deletedContact = await Contact.deleteOne()
-  res.send("Delete Contact for ID: " + id);
+  res.redirect("/contacts");
 });
 
 
