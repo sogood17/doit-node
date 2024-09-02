@@ -4,23 +4,31 @@ const asyncHandler = require("express-async-handler");
 //GET contacts/
 const getAllContacts = asyncHandler(async(req, res) => {
   const allContacts = await Contact.find();
-  res.json(allContacts);
+  res.render("index", {contacts: allContacts});
 });
+
+//view add contact form
+//GET contacts/add
+const addContactForm = (req, res) => {
+  res.render("add");
+}
+
+
 //POST contacts/
-const postAllContacts = asyncHandler(async(req, res) => {
+const createContact = asyncHandler(async(req, res) => {
   const {name, email, phone} = req.body;
   if (!name || !phone) {
     return res.send("Required value not entered.");
   } else {
   const newContact = await Contact.create({name, email, phone})
-  res.send("Create Contact!");
+  res.redirect("/contacts");
   }
 });
 //GET contacts/:id
 const getContact = asyncHandler(async(req, res) => {
   const {id}=req.params;
   const contactById = await Contact.findById(id);
-  res.json(contactById);
+  res.render("update", {contact: contactById})
 });
 //PUT contacts/:id
 const updateContact = asyncHandler(async(req, res) => {
@@ -40,7 +48,7 @@ const updateContact = asyncHandler(async(req, res) => {
     contactById.phone=phone;
     }
     contactById.save();
-    res.send(id + " is Updated.");
+    res.redirect("/contacts");
   }
 });
 //DELETE contacts/:id
@@ -51,8 +59,8 @@ const deleteContact = asyncHandler(async(req, res) => {
     throw new Error("Contact not found");
   }
   const deletedContact = await Contact.deleteOne()
-  res.send("Delete Contact for ID: " + id);
+  res.redirect("/contacts");
 });
 
 
-module.exports = {getAllContacts, postAllContacts, getContact, updateContact, deleteContact};
+module.exports = {getAllContacts, addContactForm, createContact, getContact, updateContact, deleteContact};
