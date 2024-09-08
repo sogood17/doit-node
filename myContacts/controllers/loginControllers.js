@@ -12,7 +12,6 @@ const getLogin = asyncHandler(async(req, res) => {
 //POST /
 const loginUser = asyncHandler(async(req, res)=> {
   const {userID, password} = req.body;
-
   if (userID === "admin" && password === "1234") {
     res.send("login is successful");
   } else {
@@ -28,7 +27,7 @@ const getRegister = asyncHandler(async(req, res)=> {
 
 //POST register
 //POST /register
-const postRegister = asyncHandler(async(req, res)=> {
+const registerUser = asyncHandler(async(req, res)=> {
   const {userID, password, password2} = req.body;
   if (!userID || !password || !password2) {
     res.send("Please fill in the blank");
@@ -44,4 +43,4 @@ const postRegister = asyncHandler(async(req, res)=> {
 })
 
 
-module.exports = {getLogin, loginUser, getRegister, postRegister};
+module.exports = {getLogin, loginUser, getRegister, registerUser};
